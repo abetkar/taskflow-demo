@@ -26,6 +26,12 @@
           <div class="stat-value">{{ completedTasks }}</div>
           <div class="stat-label">Виконано</div>
         </div>
+
+        <div class="stat-card stat-card-pending">
+          <f7-icon f7="clock" />
+          <div class="stat-value">{{ pendingTasks }}</div>
+          <div class="stat-label">Очікує виконання</div>
+        </div>
       </div>
 
       <div class="section-heading">
@@ -58,8 +64,8 @@
     </div>
 
     <template #fixed>
-  <AppTabbar active="home" />
-</template>
+      <AppTabbar active="home" />
+    </template>
   </f7-page>
 </template>
 
@@ -72,6 +78,10 @@ const totalTasks = computed(() => tasks.length);
 
 const completedTasks = computed(() => {
   return tasks.filter(t => t.completed).length;
+});
+
+const pendingTasks = computed(() => {
+  return totalTasks.value - completedTasks.value;
 });
 
 const recentTasks = computed(() => {
